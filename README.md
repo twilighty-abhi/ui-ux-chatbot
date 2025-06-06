@@ -108,6 +108,17 @@ npm run dev:fullstack
 
 This will start both servers and you can view the application at `http://localhost:5173`.
 
+## ☁️ Deployment on Vercel
+
+This project is configured for easy deployment on [Vercel](https://vercel.com/).
+
+1.  Push your code to your GitHub repository.
+2.  Go to Vercel and import your project from GitHub.
+3.  Vercel will automatically detect the configuration. You just need to set your environment variable.
+4.  In the project settings, navigate to the **Environment Variables** section.
+5.  Add `GEMINI_API_KEY` with its value.
+6.  Click **Deploy**. Vercel will build and deploy your application.
+
 ## USAGE
 1. Open the application in your browser.
 2. Click "Choose a file" to select a UI design image.
