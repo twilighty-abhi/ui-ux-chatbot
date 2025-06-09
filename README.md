@@ -6,6 +6,7 @@ Blinky is a smart UI/UX analyzer chatbot designed to help designers and develope
 
 -   **AI-Powered Analysis**: Leverages a powerful generative AI to analyze UI designs.
 -   **Secure Login System**: Beautiful login page with email validation and Google login support.
+-   **User API Key Input**: Secure input for users to provide their own Gemini API key.
 -   **Image Upload**: Simple interface to upload UI mockups or screenshots.
 -   **Detailed Feedback**: Provides a rating, strengths, weaknesses, and suggestions based on dozens of UI/UX rules.
 -   **Aesthetic UI**: A beautiful, custom-styled interface with a pastel lavender theme.
@@ -24,11 +25,9 @@ Blinky is a smart UI/UX analyzer chatbot designed to help designers and develope
 
 ```
 .
-├── backend/
-│   ├── app.py             # Flask server for the backend
-│   ├── prompt.txt         # The knowledge base for the AI
-│   ├── requirements.txt   # Python dependencies
-│   └── .env               # For API keys (ignored by Git)
+├── api/
+│   ├── index.py           # Flask server for the backend
+│   └── prompt.txt         # The knowledge base for the AI
 │
 ├── frontend/
 │   ├── src/
@@ -59,6 +58,7 @@ Follow these instructions to get the project up and running on your local machin
 
 -   [Node.js](https://nodejs.org/) (which includes npm)
 -   [Python 3](https://www.python.org/downloads/) and `pip`
+-   **Gemini API Key** from [Google AI Studio](https://makersuite.google.com/app/apikey)
 
 ### 1. Clone the Repository
 
@@ -69,24 +69,14 @@ cd ui-ux-chatbot
 
 ### 2. Backend Setup
 
-First, set up and run the backend server.
+Set up and run the backend server.
 
 ```bash
-# Navigate to the backend directory
-cd backend
-
 # Install Python dependencies
 pip install -r requirements.txt
 
-# Create an environment file
-# (You can copy .env.example if it exists)
-touch .env
-
-# Add your Gemini API key to the .env file
-# GEMINI_API_KEY="YOUR_API_KEY_HERE"
-
 # Run the backend server
-python app.py
+python api/index.py
 ```
 
 The backend will be running at `http://localhost:5000`.
@@ -110,7 +100,7 @@ The frontend application will be accessible at `http://localhost:5173` (or the n
 
 ### 🔥 Simpler Method (Recommended)
 
-Once you have set up your `.env` file in the backend, you can run both the frontend and backend servers with a single command from the `frontend` directory:
+You can run both the frontend and backend servers with a single command from the `frontend` directory:
 
 ```bash
 # From the frontend directory
@@ -129,6 +119,7 @@ This will start both servers and you can view the application at `http://localho
 
 ### 2. Home Page (UI/UX Analyzer)
 - After successful login, you're redirected to `/home`
+- **Enter your Gemini API key** in the input box on the right side
 - Upload UI design images for analysis
 - Get detailed AI-powered feedback
 - Access "Sign Up" link in the top-right corner to return to login
@@ -144,16 +135,27 @@ This will start both servers and you can view the application at `http://localho
 - **Google Login**: UI ready for Google OAuth integration
 - **Responsive Design**: Login page works on all device sizes
 
+## 🔑 API Key Setup
+
+1. **Get your Gemini API Key**:
+   - Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Sign in with your Google account
+   - Create a new API key
+   - Copy the key
+
+2. **Use in the application**:
+   - Enter your API key in the secure input field on the home page
+   - The key is hidden with asterisks for security
+   - Your key is only used for the current session and not stored
+
 ## ☁️ Deployment on Vercel
 
 This project is configured for easy deployment on [Vercel](https://vercel.com/).
 
 1.  Push your code to your GitHub repository.
 2.  Go to Vercel and import your project from GitHub.
-3.  Vercel will automatically detect the configuration. You just need to set your environment variable.
-4.  In the project settings, navigate to the **Environment Variables** section.
-5.  Add `GEMINI_API_KEY` with its value.
-6.  Click **Deploy**. Vercel will build and deploy your application.
+3.  Vercel will automatically detect the configuration.
+4.  Click **Deploy**. No environment variables needed!
 
 ## 📱 Usage
 
@@ -166,10 +168,11 @@ This project is configured for easy deployment on [Vercel](https://vercel.com/).
 
 ### UI/UX Analysis
 1. After logging in, you'll be on the home page
-2. Click "Choose a file" to select a UI design image
-3. Click "Analyze Design" to submit it for analysis
-4. View the detailed feedback in the results section
-5. Use the "Sign Up" link in the top-right corner if needed
+2. **Enter your Gemini API key** in the secure input field on the right
+3. Click "Choose a file" to select a UI design image
+4. Click "Analyze Design" to submit it for analysis
+5. View the detailed feedback in the results section
+6. Use the "Sign Up" link in the top-right corner if needed
 
 ## 🎨 Design Features
 
@@ -177,4 +180,5 @@ This project is configured for easy deployment on [Vercel](https://vercel.com/).
 - **Modern Typography**: Poppins and Lobster fonts
 - **Smooth Animations**: Hover effects and transitions
 - **Mobile Responsive**: Adapts to different screen sizes
-- **Clean Layout**: Intuitive and user-friendly interface 
+- **Clean Layout**: Intuitive and user-friendly interface
+- **Secure API Input**: Password-type input for API keys 

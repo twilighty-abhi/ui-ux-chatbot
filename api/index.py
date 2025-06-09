@@ -3,21 +3,11 @@ import google.generativeai as genai
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from PIL import Image
-from dotenv import load_dotenv
 import traceback
-
-load_dotenv()
 
 # Build the absolute path to the prompt.txt file
 script_dir = os.path.dirname(os.path.abspath(__file__))
 prompt_path = os.path.join(script_dir, 'prompt.txt')
-
-# Configure the generative AI model
-api_key = os.getenv("GEMINI_API_KEY")
-if not api_key:
-    raise ValueError("GEMINI_API_KEY not found in .env file")
-genai.configure(api_key=api_key)
-model = genai.GenerativeModel('gemini-1.5-flash')
 
 # Load the prompt from the file
 with open(prompt_path, 'r') as f:
@@ -34,7 +24,16 @@ def analyze_image():
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
     
+    # Get API key from the request
+    api_key = request.form.get('api_key')
+    if not api_key:
+        return jsonify({'error': 'Gemini API key is required'}), 400
+    
     try:
+        # Configure the generative AI model with user's API key
+        genai.configure(api_key=api_key)
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        
         img = Image.open(file.stream)
         
         response = model.generate_content([prompt_text, img])
