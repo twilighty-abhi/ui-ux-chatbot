@@ -39,35 +39,37 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="login-page">
-            <div className="login-container">
-                <h2>Welcome Back!</h2>
-                <p>Please log in to continue</p>
-                {error && <p className="error-message">{error}</p>}
-                <div className="login-form">
-                    <input 
-                        type="email" 
-                        placeholder="Email" 
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <input 
-                        type="password" 
-                        placeholder="Password" 
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <button className="btn-login" onClick={handleLogin}>Login</button>
-                    <p className="forgot-password"><Link to="#">Forgot Password?</Link></p>
-                </div>
-                <div className="divider">
-                    <span>OR</span>
-                </div>
-                <div className="social-login">
-                    <button className="btn-google" onClick={handleGoogleLogin}>
-                        <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google" />
-                        Login with Google
-                    </button>
+        <div className="login-page-container">
+            <div className="login-page">
+                <div className="login-container">
+                    <h2>Welcome Back!</h2>
+                    <p>Please log in to continue</p>
+                    {error && <p className="error-message">{error}</p>}
+                    <div className="login-form">
+                        <input 
+                            type="email" 
+                            placeholder="Email" 
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <input 
+                            type="password" 
+                            placeholder="Password" 
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <button className="btn-login" onClick={handleLogin}>Login</button>
+                        <p className="forgot-password"><Link to="#">Forgot Password?</Link></p>
+                    </div>
+                    <div className="divider">
+                        <span>OR</span>
+                    </div>
+                    <div className="social-login">
+                        <button className="btn-google" onClick={handleGoogleLogin}>
+                            <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google" />
+                            Login with Google
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

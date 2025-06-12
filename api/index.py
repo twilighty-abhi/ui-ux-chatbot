@@ -6,8 +6,10 @@ from PIL import Image
 import traceback
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
+# Build the absolute path to the .env file and load it
+script_dir = os.path.dirname(os.path.abspath(__file__))
+dotenv_path = os.path.join(script_dir, '.env')
+load_dotenv(dotenv_path=dotenv_path)
 
 # Configure the Gemini API key from environment variable
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
@@ -18,7 +20,6 @@ if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
 
 # Build the absolute path to the prompt.txt file
-script_dir = os.path.dirname(os.path.abspath(__file__))
 prompt_path = os.path.join(script_dir, 'prompt.txt')
 
 # Load the prompt from the file
