@@ -4,6 +4,18 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from PIL import Image
 import traceback
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Configure the Gemini API key from environment variable
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+if not GEMINI_API_KEY:
+    # This print statement is for debugging purposes on the server
+    print("Error: GEMINI_API_KEY environment variable not set.")
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
 
 # Build the absolute path to the prompt.txt file
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -24,14 +36,11 @@ def analyze_image():
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
     
-    # Get API key from the request
-    api_key = request.form.get('api_key')
-    if not api_key:
-        return jsonify({'error': 'Gemini API key is required'}), 400
+    # Check if API key is configured on the server
+    if not GEMINI_API_KEY:
+        return jsonify({'error': 'Gemini API key is not configured on the server.'}), 500
     
     try:
-        # Configure the generative AI model with user's API key
-        genai.configure(api_key=api_key)
         model = genai.GenerativeModel('gemini-1.5-flash')
         
         img = Image.open(file.stream)

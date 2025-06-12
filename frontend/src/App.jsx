@@ -4,14 +4,12 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import './App.css';
 import backgroundImage from './assets/background.jpg';
-import { Link } from 'react-router-dom';
 
 function App() {
     const [file, setFile] = useState(null);
     const [analysis, setAnalysis] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [apiKey, setApiKey] = useState('');
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -26,17 +24,11 @@ function App() {
             return;
         }
 
-        if (!apiKey.trim()) {
-            setError('Please enter your Gemini API key.');
-            return;
-        }
-
         setLoading(true);
         setError('');
 
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('api_key', apiKey);
 
         try {
             const apiUrl = import.meta.env.PROD ? '/api/analyze' : 'http://localhost:5000/analyze';
@@ -47,7 +39,8 @@ function App() {
             });
             setAnalysis(res.data.analysis);
         } catch (err) {
-            setError('An error occurred during analysis. Please check your API key and try again.');
+            const errorMessage = err.response?.data?.error || 'An error occurred during analysis. Please try again.';
+            setError(errorMessage);
             console.error(err);
         } finally {
             setLoading(false);
@@ -57,23 +50,10 @@ function App() {
     return (
         <div className="App" style={{ backgroundImage: `url(${backgroundImage})` }}>
             <header className="App-header">
-                <Link to="/" className="signup-link-corner">Sign Up</Link>
                 <h1>Blinky</h1>
                 <p>Upload your UI design to get an expert analysis.</p>
             </header>
             <main>
-                <div className="api-key-container">
-                    <label htmlFor="api-key">Gemini API Key:</label>
-                    <input
-                        id="api-key"
-                        type="password"
-                        placeholder="Enter your Gemini API key"
-                        value={apiKey}
-                        onChange={(e) => setApiKey(e.target.value)}
-                        className="api-key-input"
-                    />
-                    <p className="api-key-note">Get your free API key from <a href="https://makersuite.google.com/app/apikey" target="_blank" rel="noopener noreferrer">Google AI Studio</a></p>
-                </div>
                 <form onSubmit={handleSubmit} className="upload-form">
                     <div className="file-input-wrapper">
                         <input type="file" id="file" onChange={handleFileChange} />
