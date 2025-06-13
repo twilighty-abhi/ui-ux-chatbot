@@ -1,10 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Lobster&family=Playfair+Display:wght@400;700&family=DM+Serif+Display&display=swap');
 
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     color: #333;
+    background-image: url('./assets/bgful.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    min-height: 100vh;
 }
 
 .background {
@@ -13,11 +19,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('./assets/background.jpg');
-    background-size: cover;
-    background-position: center;
+    background-color: white;
     z-index: -1;
-    filter: blur(8px) brightness(0.9);
 }
 
 .container {
@@ -37,22 +40,23 @@ header {
 }
 
 header h1 {
-    color: #6a1b9a;
-    font-size: 5rem;
+    color: #000;
+    font-size: 7rem;
     font-family: 'Lobster', cursive;
     margin-bottom: 0.5rem;
 }
 
 header p {
-    color: #8e44ad;
+    color: #000;
     font-size: 1.2rem;
+    font-family: 'Playfair Display', serif;
 }
 
 .btn-signout {
     position: absolute;
     top: 0;
     right: 20px;
-    background-color: #8e44ad;
+    background-color: #000;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -60,18 +64,19 @@ header p {
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.3s;
+    font-family: 'Playfair Display', serif;
 }
 
 .btn-signout:hover {
-    background-color: #6a1b9a;
+    background-color: #333;
 }
 
 main {
     width: 100%;
     max-width: 800px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
     padding: 40px;
     box-sizing: border-box;
 }
@@ -89,8 +94,8 @@ main {
 }
 
 .btn-upload {
-    background-color: #e1bee7;
-    color: #6a1b9a;
+    background-color: #f0f0f0;
+    color: #000;
     padding: 12px 25px;
     border-radius: 8px;
     cursor: pointer;
@@ -99,15 +104,15 @@ main {
 }
 
 .btn-upload:hover {
-    background-color: #ce93d8;
+    background-color: #e0e0e0;
 }
 
 .upload-section button {
-    background-color: #9c27b0;
+    background-color: #000;
     color: white;
     border: none;
     padding: 12px 30px;
-    font-size: 1rem;
+    font-size: 2rem;
     font-weight: bold;
     border-radius: 8px;
     cursor: pointer;
@@ -115,12 +120,12 @@ main {
 }
 
 .upload-section button:disabled {
-    background-color: #ba68c8;
+    background-color: #666;
     cursor: not-allowed;
 }
 
 .upload-section button:hover:not(:disabled) {
-    background-color: #8e24aa;
+    background-color: #333;
     transform: translateY(-2px);
 }
 
@@ -142,7 +147,7 @@ main {
     justify-content: center;
     gap: 15px;
     margin: 30px 0;
-    color: #6a1b9a;
+    color: #000;
 }
 
 .spinner {
@@ -150,7 +155,7 @@ main {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    border-left-color: #6a1b9a;
+    border-left-color: #000;
     animation: spin 1s ease infinite;
 }
 
@@ -170,8 +175,8 @@ main {
 }
 
 .results-section h2 {
-    color: #6a1b9a;
-    border-bottom: 2px solid #e1bee7;
+    color: #000;
+    border-bottom: 2px solid #ccc;
     padding-bottom: 10px;
     margin-bottom: 20px;
     font-size: 1.8rem;
@@ -181,7 +186,7 @@ main {
 .results-section h4,
 .results-section h5,
 .results-section h6 {
-    color: #8e44ad;
+    color: #000;
     margin-top: 1.5rem;
     margin-bottom: 1rem;
 }
@@ -245,33 +250,35 @@ main {
 }
 
 .App-header h1 {
-  color: #6a1b9a;
+  color: #000;
   font-size: 5.5rem;
   font-family: 'Lobster', cursive;
   margin-bottom: 0.5rem;
 }
 
 .App-header p {
-  color: #8e44ad;
+  color: #000;
   font-size: 1.2rem;
+  font-family: 'Playfair Display', serif;
 }
 
 .signup-link-corner {
   position: fixed;
   top: 20px;
   right: 20px;
-  color: #8e44ad;
+  color: #000;
   text-decoration: none;
   font-weight: 600;
   padding: 8px 16px;
-  border: 2px solid #8e44ad;
+  border: 2px solid #000;
   border-radius: 8px;
   transition: all 0.3s ease;
   z-index: 1000;
+  font-family: 'Playfair Display', serif;
 }
 
 .signup-link-corner:hover {
-  background-color: #8e44ad;
+  background-color: #000;
   color: white;
 }
 
@@ -279,11 +286,30 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  gap: 1rem;
+  background: none;
+  padding: 40px 60px 40px 60px;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background-image: url('./assets/bg.png?v=2');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 700px;
+  height: 400px;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.choose-file-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: #000;
+  margin: 0;
+  font-weight: 100;
+  text-align: center;
 }
 
 .file-input-wrapper {
@@ -302,8 +328,8 @@ main {
 }
 
 .file-input-label {
-  background-color: #e1bee7;
-  color: #6a1b9a;
+  background-color: transparent;
+  color: #000;
   padding: 0.8rem 1.5rem;
   border-radius: 8px;
   cursor: pointer;
@@ -312,28 +338,41 @@ main {
 }
 
 .file-input-label:hover {
-  background-color: #ce93d8;
+  background-color: transparent;
+}
+
+.upload-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-icon {
+  width: 40px;
+  height: 40px;
+  color: #000;
 }
 
 button {
-  background-color: #9c27b0;
+  background-color: #000;
   color: white;
   border: none;
-  padding: 1rem 2.5rem;
+  padding: 0.6rem 1.5rem;
   font-size: 1rem;
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  font-family: 'DM Serif Display', serif;
 }
 
 button:disabled {
-  background-color: #ba68c8;
+  background-color: #666;
   cursor: not-allowed;
 }
 
 button:hover:not(:disabled) {
-  background-color: #8e24aa;
+  background-color: #333;
   transform: translateY(-2px);
 }
 
@@ -357,8 +396,8 @@ button:hover:not(:disabled) {
 }
 
 .analysis-result h2 {
-  color: #6a1b9a;
-  border-bottom: 2px solid #e1bee7;
+  color: #000;
+  border-bottom: 2px solid #ccc;
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -369,7 +408,7 @@ button:hover:not(:disabled) {
 .analysis-result h4,
 .analysis-result h5,
 .analysis-result h6 {
-    color: #8e44ad;
+    color: #000;
     margin-top: 2rem;
     margin-bottom: 1rem;
     font-size: 1.9rem;
@@ -415,7 +454,7 @@ button:hover:not(:disabled) {
 }
 
 .analysis-result strong {
-    color: #4a148c;
+    color: #000;
 }
 
 .analysis-result table {
@@ -432,8 +471,8 @@ button:hover:not(:disabled) {
 }
 
 .analysis-result th {
-    background-color: #f3e5f5;
-    color: #6a1b9a;
+    background-color: #f0f0f0;
+    color: #000;
     font-weight: bold;
 }
 

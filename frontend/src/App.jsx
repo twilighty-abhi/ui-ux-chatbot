@@ -3,12 +3,11 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage'; // Assuming you have this
 import './App.css';
-import backgroundImage from './assets/background.jpg';
 
 function App() {
     return (
         <Router>
-            <div className="App" style={{ backgroundImage: `url(${backgroundImage})` }}>
+            <div className="App">
                 <Routes>
                     {/* Auth pages */}
                     <Route path="/" element={<LoginPage />} />
@@ -19,9 +18,9 @@ function App() {
                     <Route path="/home" element={
                         <>
                             <header className="App-header">
-                                <Link to="/login" className="signup-link-corner">Sign Out</Link>
+                                <Link to="/login" className="signup-link-corner">Sign In</Link>
                                 <h1>Blinky</h1>
-                                <p>Upload your UI design to get an expert analysis.</p>
+                                <p>Let Blinky blink for better design!</p>
                             </header>
                             <HomePage />
                         </>

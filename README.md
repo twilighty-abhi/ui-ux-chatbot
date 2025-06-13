@@ -1,17 +1,33 @@
 # Blinky - The UI/UX Analyzer Chatbot
 
-Blinky is a smart UI/UX analyzer chatbot designed to help designers and developers improve their user interfaces. By uploading a design image, users can receive an expert-level analysis based on established UI/UX principles. This version is configured to use a server-side API key for security and ease of use.
+Blinky is a smart UI/UX analyzer chatbot designed to help designers and developers improve their user interfaces. By uploading a design image, users can receive an expert-level analysis based on established UI/UX principles. This version features a beautiful custom design with premium typography and a modern interface.
 
 ## ✨ Features
 
--   **AI-Powered Analysis**: Leverages Google Gemini to analyze UI designs.
+-   **AI-Powered Analysis**: Leverages Google Gemini to analyze UI designs with detailed feedback.
 -   **Secure API Key Handling**: API key is managed securely on the backend via an environment file.
--   **Authentication Flow**: A clean, modern login page is the entry point to the application, with a sign-out feature.
--   **Image Upload**: Simple interface to upload UI mockups or screenshots.
--   **Detailed Feedback**: Provides a rating, strengths, weaknesses, and suggestions.
--   **Modern UI**: A beautiful, custom-styled interface.
--   **Client-Side Routing**: Uses React Router for a smooth single-page application experience.
--   **Development Proxy**: Configured for a seamless development experience where the frontend and backend work under one link.
+-   **Authentication Flow**: Clean login/signup system with modern design aesthetics.
+-   **Custom Design System**: 
+    - **Typography**: Lobster font for branding, Playfair Display for elegant text, DM Serif Display for buttons
+    - **Custom Frame**: Beautiful rounded frame design for upload interface
+    - **Professional UI**: Black and white color scheme with custom background
+-   **Image Upload Interface**: Intuitive drag-and-drop style upload with custom icons.
+-   **Detailed Feedback**: Comprehensive analysis including ratings, strengths, weaknesses, and actionable suggestions.
+-   **Responsive Design**: Optimized for various screen sizes and devices.
+-   **Client-Side Routing**: Smooth navigation using React Router.
+-   **Development Proxy**: Seamless frontend-backend integration.
+
+## 🎨 Design Features
+
+- **Premium Typography**: 
+  - Lobster font for "Blinky" branding
+  - Playfair Display for taglines and sign-in elements
+  - DM Serif Display for action buttons
+  - Poppins for body text
+- **Custom Frame Design**: Upload interface with beautiful rounded frame
+- **Professional Color Scheme**: Clean black and white aesthetic
+- **Background Design**: Custom full-page background for immersive experience
+- **Modern Icons**: Custom SVG upload icons for better user experience
 
 ## 📂 Project Structure
 
@@ -24,14 +40,18 @@ Blinky is a smart UI/UX analyzer chatbot designed to help designers and develope
 │
 ├── frontend/
 │   ├── src/
+│   │   ├── assets/        # Images and design assets
+│   │   │   ├── bg.png     # Custom frame design
+│   │   │   └── bgful.png  # Full page background
 │   │   ├── pages/
 │   │   │   ├── HomePage.jsx
 │   │   │   ├── LoginPage.jsx
 │   │   │   └── SignUpPage.jsx
 │   │   ├── styles/
 │   │   │   └── LoginPage.css
-│   │   ├── App.jsx          # Main component with routing
-│   │   └── main.jsx         # React entry point
+│   │   ├── App.jsx        # Main component with routing
+│   │   ├── App.css        # Main styling with custom design system
+│   │   └── main.jsx       # React entry point
 │   ├── vite.config.js     # Vite config with proxy setup
 │   └── package.json       # Frontend dependencies
 │
@@ -106,10 +126,22 @@ The application will be accessible at `http://localhost:5173`. Thanks to the pro
 
 ## 🎯 Application Flow
 
-1.  **Landing Page**: The user lands on the Login Page at `http://localhost:5173/`.
-2.  **Login**: The user enters their credentials and is navigated to the home page.
-3.  **Home Page**: At `/home`, the user can upload a design for analysis.
-4.  **Sign Out**: A "Sign Out" button in the corner navigates the user back to the login page.
+1.  **Landing Page**: Users start at the Login Page with beautiful typography and design.
+2.  **Authentication**: Clean login/signup flow with Playfair Display fonts.
+3.  **Home Page**: Features the main "Blinky" title with custom upload frame containing:
+    - "Choose your File" text in Playfair Display
+    - Custom upload icon with professional styling
+    - "Analyze Design" button in DM Serif Display font
+4.  **Analysis**: Comprehensive UI/UX feedback with detailed markdown formatting.
+5.  **Navigation**: "Sign In" link in top corner using Playfair Display font.
+
+## 🛠 Development Notes
+
+- **Font Loading**: Custom Google Fonts integrated for premium typography
+- **Asset Management**: Custom images stored in `frontend/src/assets/`
+- **Styling Architecture**: Centralized CSS with design system approach
+- **Component Structure**: Clean separation of pages and styling
+- **Background Handling**: Fixed background with cover sizing for immersive experience
 
 ## 🌿 Git Branches
 
