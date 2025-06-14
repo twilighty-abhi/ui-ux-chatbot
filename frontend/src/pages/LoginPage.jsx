@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { signInUser, signInWithGoogle, resetPassword } from '../services/authService';
 import './../styles/LoginPage.css';
 
 const LoginPage = () => {
@@ -7,8 +8,9 @@ const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         // Clear previous errors
         setError('');
 
@@ -26,16 +28,70 @@ const LoginPage = () => {
             return;
         }
 
-        // Mock authentication - redirect to home page after login
-        navigate('/home');
+        setLoading(true);
+
+        try {
+            const { user, error } = await signInUser(email, password);
+            
+            if (error) {
+                setError(error);
+            } else {
+                // Successfully logged in
+                navigate('/home');
+            }
+        } catch (err) {
+            setError('An unexpected error occurred. Please try again.');
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const handleGoogleLogin = () => {
-        // For now, show an alert since Google OAuth requires setup
-        alert('Google login feature coming soon! Please use email/password for now.');
-        
-        // In a real app, you would integrate with Google OAuth here:
-        // window.location.href = 'https://accounts.google.com/oauth/authorize?...';
+    const handleGoogleLogin = async () => {
+        setLoading(true);
+        setError('');
+
+        try {
+            const { user, error } = await signInWithGoogle();
+            
+            if (error) {
+                setError(error);
+            } else {
+                // Successfully logged in with Google
+                navigate('/home');
+            }
+        } catch (err) {
+            setError('Google login failed. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleForgotPassword = async () => {
+        if (!email.trim()) {
+            setError('Please enter your email address to reset password');
+            return;
+        }
+        if (!email.includes('@')) {
+            setError('Please enter a valid email address');
+            return;
+        }
+
+        setLoading(true);
+        setError('');
+
+        try {
+            const { error } = await resetPassword(email);
+            
+            if (error) {
+                setError(error);
+            } else {
+                alert('Password reset email sent! Check your inbox.');
+            }
+        } catch (err) {
+            setError('Failed to send password reset email. Please try again.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -51,25 +107,52 @@ const LoginPage = () => {
                             placeholder="Email" 
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            disabled={loading}
                         />
                         <input 
                             type="password" 
                             placeholder="Password" 
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            disabled={loading}
                         />
-                        <button className="btn-login" onClick={handleLogin}>Login</button>
-                        <p className="forgot-password"><Link to="#">Forgot Password?</Link></p>
-                    </div>
-                    <div className="divider">
-                        <span>OR</span>
-                    </div>
-                    <div className="social-login">
-                        <button className="btn-google" onClick={handleGoogleLogin}>
-                            <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google" />
-                            Login with Google
+                        <button 
+                            className="btn-login" 
+                            onClick={handleLogin}
+                            disabled={loading}
+                        >
+                            {loading ? 'Logging in...' : 'Login'}
                         </button>
+                        <p className="forgot-password">
+                            <span 
+                                onClick={handleForgotPassword} 
+                                style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
+                            >
+                                Forgot Password?
+                            </span>
+                        </p>
                     </div>
+                    {/* Google Sign-In with redirect method */}
+                    {true && (
+                        <>
+                            <div className="divider">
+                                <span>OR</span>
+                            </div>
+                            <div className="social-login">
+                                <button 
+                                    className="btn-google" 
+                                    onClick={handleGoogleLogin}
+                                    disabled={loading}
+                                >
+                                    <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google" />
+                                    {loading ? 'Signing in...' : 'Login with Google'}
+                                </button>
+                            </div>
+                        </>
+                    )}
+                    <p className="signup-link">
+                        Don't have an account? <Link to="/signup">Sign Up</Link>
+                    </p>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import os
 import google.generativeai as genai
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory, send_file
 from flask_cors import CORS
 from PIL import Image
 import traceback
@@ -26,10 +26,14 @@ prompt_path = os.path.join(script_dir, 'prompt.txt')
 with open(prompt_path, 'r') as f:
     prompt_text = f.read()
 
-app = Flask(__name__)
+# Get the built frontend directory path
+frontend_dist_path = os.path.join(os.path.dirname(script_dir), 'frontend', 'dist')
+
+app = Flask(__name__, static_folder=frontend_dist_path, static_url_path='')
 CORS(app)  # Allow cross-origin requests
 
-@app.route('/analyze', methods=['POST'])
+# API Routes (these must come before the catch-all route)
+@app.route('/api/analyze', methods=['POST'])
 def analyze_image():
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'}), 400
@@ -53,6 +57,27 @@ def analyze_image():
         print("An error occurred during analysis:")
         traceback.print_exc()
         return jsonify({'error': str(e)}), 500
+
+# Backward compatibility route
+@app.route('/analyze', methods=['POST'])
+def analyze_image_legacy():
+    return analyze_image()
+
+# Serve the React app
+@app.route('/')
+def serve_react_app():
+    return send_from_directory(app.static_folder, 'index.html')
+
+# Handle React Router routes (this must come after API routes)
+@app.route('/<path:path>')
+def serve_react_routes(path):
+    # For static files (CSS, JS, images), serve them directly
+    file_path = os.path.join(app.static_folder, path)
+    if os.path.exists(file_path) and os.path.isfile(file_path):
+        return send_from_directory(app.static_folder, path)
+    
+    # For any other route, serve the React app (for client-side routing)
+    return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True) 
