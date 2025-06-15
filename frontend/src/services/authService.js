@@ -9,7 +9,7 @@ import {
 import { auth } from '../firebase';
 
 // Development mode flag (set to false when Firebase is properly configured)
-const DEV_MODE = true; // Set to true for testing without Firebase setup
+const DEV_MODE = false; // Set to true for testing without Firebase setup
 
 // Mock user for development
 const mockUser = {
